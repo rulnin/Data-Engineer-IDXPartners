@@ -4,21 +4,21 @@
 
 This project is designed to build a Data Warehouse (DWH) for a banking client of ID/X Partners. The client needs to consolidate data from multiple sources into a structured DWH to facilitate efficient reporting and analysis. The data sources include:
 
-transaction_excel (Excel file)
+* transaction_excel (Excel file)
 
-transaction_csv (CSV file)
+* transaction_csv (CSV file)
 
-transaction_db (SQL Server Database)
+* transaction_db (SQL Server Database)
 
-account (SQL Server Database)
+* account (SQL Server Database)
 
-customer (SQL Server Database)
+* customer (SQL Server Database)
 
-branch (SQL Server Database)
+* branch (SQL Server Database)
 
-city (SQL Server Database)
+* city (SQL Server Database)
 
-state (SQL Server Database)
+* state (SQL Server Database)
 
 The main challenge is extracting data from multiple formats and integrating them into a unified system while ensuring data consistency and accuracy.
 
