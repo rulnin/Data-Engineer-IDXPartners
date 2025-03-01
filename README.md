@@ -36,6 +36,8 @@ Define one fact table: FactTransaction.
 
 Assign appropriate primary keys and foreign keys.
 
+![image](https://github.com/user-attachments/assets/92c33c04-4f00-4c8c-8411-19a11daf1a07)
+
 2. ETL Job for Dimension Tables
 
 Develop an ETL job in Talend to extract data from the source systems and load it into the dimension tables.
