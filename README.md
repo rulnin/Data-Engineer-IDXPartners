@@ -1,108 +1,99 @@
 # Data Warehouse ETL Project
 
-📌 Overview
+# Project Overview
 
-Proyek ini bertujuan untuk membangun sebuah Data Warehouse (DWH) untuk salah satu klien dari ID/X Partners yang bergerak di industri perbankan. Data berasal dari berbagai sumber seperti file Excel, CSV, dan database SQL Server. Tantangan utama adalah melakukan ekstraksi, transformasi, dan pemuatan (ETL) data ke dalam Data Warehouse secara optimal agar pelaporan dan analisis data menjadi lebih efisien.
+This project is designed to build a Data Warehouse (DWH) for a banking client of ID/X Partners. The client needs to consolidate data from multiple sources into a structured DWH to facilitate efficient reporting and analysis. The data sources include:
 
-📂 Sumber Data
+transaction_excel (Excel file)
 
-transaction_excel (File Excel)
+transaction_csv (CSV file)
 
-transaction_csv (File CSV)
+transaction_db (SQL Server Database)
 
-transaction_db (Database SQL Server)
+account (SQL Server Database)
 
-account (Database SQL Server)
+customer (SQL Server Database)
 
-customer (Database SQL Server)
+branch (SQL Server Database)
 
-branch (Database SQL Server)
+city (SQL Server Database)
 
-city (Database SQL Server)
+state (SQL Server Database)
 
-state (Database SQL Server)
+The main challenge is extracting data from multiple formats and integrating them into a unified system while ensuring data consistency and accuracy.
 
-🎯 Tujuan
+# Project Tasks
 
-Sebagai Data Engineer, tugas utama dalam proyek ini adalah:
+As a Data Engineer, the tasks for this project include:
 
-Membuat database baru bernama DWH.
+1. Database Creation
 
-Membuat tabel:
+Create a new database named DWH.
 
-DimAccount
+Define three dimension tables: DimAccount, DimCustomer, DimBranch.
 
-DimCustomer (dengan format kolom: CustomerID, CustomerName, Address, CityName, StateName, Age, Gender, Email dalam PascalCase, dengan semua teks dikonversi ke huruf kapital kecuali CustomerID, Age, Email)
+Define one fact table: FactTransaction.
 
-DimBranch
+Assign appropriate primary keys and foreign keys.
 
-FactTransaction (menyimpan transaksi tanpa duplikasi)
+2. ETL Job for Dimension Tables
 
-Membangun job ETL di Talend untuk memindahkan data ke tabel dimension dan fact.
+Develop an ETL job in Talend to extract data from the source systems and load it into the dimension tables.
 
-Menggabungkan data transaksi dari tiga sumber (transaction_excel, transaction_csv, transaction_db) ke dalam tabel FactTransaction tanpa duplikasi.
+Ensure that DimCustomer contains the following columns:
 
-Membuat dua Stored Procedure (SP) untuk analisis data:
+CustomerID, CustomerName, Address, CityName, StateName, Age, Gender, Email
 
-DailyTransaction: Menghitung total transaksi dan jumlah nominal per hari berdasarkan parameter start_date dan end_date.
+Convert all column values to uppercase except CustomerID, Age, and Email.
 
-BalancePerCustomer: Menghitung saldo akhir per pelanggan berdasarkan parameter name, dengan aturan penambahan dan pengurangan saldo berdasarkan jenis transaksi (Deposit menambah saldo, selain itu mengurangi saldo). Hanya menampilkan akun yang berstatus active.
+Follow PascalCase naming conventions for column names.
 
-🛠️ Teknologi yang Digunakan
+3. ETL Job for Fact Table
 
-Talend (ETL Tool)
+Develop an ETL job to merge transaction data from transaction_excel, transaction_csv, and transaction_db into FactTransaction.
 
-SQL Server (Database Management)
+Ensure no duplicate rows exist in FactTransaction despite differences in data sources.
 
-Excel & CSV (Sumber Data)
+4. Stored Procedures
 
-📌 Output Contoh
+Implement two stored procedures (SP) to enable fast data retrieval:
 
-1. DailyTransaction
+a. DailyTransaction
 
-Date
+Calculates the total number of transactions and their sum for each day.
 
-TotalTransactions
+Expected output columns: Date, TotalTransactions, TotalAmount.
 
-TotalAmount
+Parameters: @start_date, @end_date.
 
-2024-02-20
+b. BalancePerCustomer
 
-100
+Retrieves the remaining balance per customer.
 
-500,000
+Expected output columns: CustomerName, AccountType, Balance, CurrentBalance.
 
-2024-02-21
+CurrentBalance is computed as:
 
-120
+Balance from account table minus the total transaction amount.
 
-600,000
+If transaction_type = Deposit, balance increases; otherwise, it decreases.
 
-2. BalancePerCustomer
+Filters only active accounts.
 
-CustomerName
+Parameter: @name (Customer Name).
 
-AccountType
+# Technologies Used
 
-Balance
+Database: SQL Server
 
-CurrentBalance
+ETL Tool: Talend
 
-Shelly
+Scripting: SQL (Stored Procedures)
 
-Savings
+# How to Use
 
-1,000
+Set up a SQL Server database and create the required tables.
 
-500
+Use Talend to execute ETL jobs and populate the Data Warehouse.
 
-🚀 Cara Menjalankan
-
-Buat Database DWH di SQL Server.
-
-Jalankan Talend Jobs untuk melakukan ETL.
-
-Jalankan Stored Procedure untuk analisis data dengan parameter yang sesuai.
-
-Proyek ini bertujuan untuk meningkatkan efisiensi dalam pengolahan data perbankan dan mempercepat proses pelaporan serta analisis bisnis.
-
+Run stored procedures to generate required reports.
